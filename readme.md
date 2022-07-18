@@ -9,10 +9,10 @@
 The code found here is a part of my blog on using "Infrastructure as Code" with Terraform.  I'm writing different exercises on how to use Terraform to create AWS deployments in my WordPress site. 
 
 ## Features
+* Using the same modular code to deply AWS resources by the Development team or the Quality_Assuarnce team such that they can deploy in any region with unique AWS characteristics and unique identity tags
 * Using Terraform to deploy infrastructure [Why use Infrastructure as Code](https://josephomara.com/2021/08/23/why-infrastructure-as-code/(opens in a new tab))
 * use Terraform to deploy an Auto Scaling Group and an Application Load Balancer in AWS
 * Load balancing EC2 instances with Docker container for MyWebsite
-* Using Modular Code to where Development team or Quality_Assuarnce team can deploy in any region with their identity tags
 
 ![Diagram for Simply Modular](/Users/joe/GitHub/Terraform/Simply_modular/Diagram for Simply Modular.jpg)
 
