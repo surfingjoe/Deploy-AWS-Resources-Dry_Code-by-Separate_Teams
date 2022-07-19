@@ -103,7 +103,7 @@ resource "aws_instance" "nat" {
   ami                         = data.aws_ami.amazon_nat.id
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.public-1.id
-  vpc_security_group_ids      = ["${aws_security_group.nat-sg.id}", "${aws_security_group.controller-sg.id}"]
+  vpc_security_group_ids      = ["${aws_security_group.nat-sg.id}"]
   associate_public_ip_address = true
   source_dest_check           = false
   monitoring                  = true
@@ -119,7 +119,7 @@ resource "aws_instance" "nat2" {
   ami                         = data.aws_ami.amazon_nat.id
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.public-2.id
-  vpc_security_group_ids      = ["${aws_security_group.nat-sg.id}", "${aws_security_group.controller-sg.id}"]
+  vpc_security_group_ids      = ["${aws_security_group.nat-sg.id}"]
   associate_public_ip_address = true
   source_dest_check           = false
   monitoring                  = true
@@ -196,38 +196,4 @@ resource "aws_route_table_association" "private-route-association-2" {
   route_table_id = aws_route_table.nat-route-2.id
 }
 
-# *************  Create Database Subnet **********************
-# --------------------- Database Subnet #1 -------------------
-resource "aws_subnet" "database-1" {
-  vpc_id                  = aws_vpc.my-vpc.id
-  map_public_ip_on_launch = false
-  availability_zone       = data.aws_availability_zones.available.names[0]
-  cidr_block              = var.database_cidr
-  tags = {
-    Name  = "database_subnet-1"
-    Stage = "${var.environment}"
-    Owner = "${var.owner_name}"
-  }
-}
-# -------- Associate database subnet 1 to NAT 1 route -------
-resource "aws_route_table_association" "database-route-association" {
-  subnet_id      = aws_subnet.database-1.id
-  route_table_id = aws_route_table.nat-route.id
-}
-# --------------------- Database Subnet #2 ---------------------
-resource "aws_subnet" "database-2" {
-  vpc_id                  = aws_vpc.my-vpc.id
-  map_public_ip_on_launch = false
-  availability_zone       = data.aws_availability_zones.available.names[1]
-  cidr_block              = var.database_cidr2
-  tags = {
-    Name  = "database_subnet-2"
-    Stage = "${var.environment}"
-    Owner = "${var.owner_name}"
-  }
-}
-# -------- Associate database subnet 2 to NAT 2 route -------
-resource "aws_route_table_association" "database-route-association-2" {
-  subnet_id      = aws_subnet.database-2.id
-  route_table_id = aws_route_table.nat-route-2.id
-}
+
