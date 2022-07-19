@@ -1,5 +1,3 @@
-# --------------------- Calculate Subnets --------------
-
 #--Get Terraform Remote State from Parent Module -------
 data "terraform_remote_state" "Terraform-Remote-State" {
   backend = "s3"
@@ -68,7 +66,7 @@ resource "aws_route_table" "public-route" {
 # --------------------- Public Subnet #1 -------------------
 resource "aws_subnet" "public-1" {
   vpc_id                  = aws_vpc.my-vpc.id
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = var.map_public_ip_on_launch
   availability_zone       = data.aws_availability_zones.available.names[0]
   cidr_block              = var.public_cidr
   tags = {
@@ -80,7 +78,7 @@ resource "aws_subnet" "public-1" {
 # --------------------- Public Subnet #2 ---------------------
 resource "aws_subnet" "public-2" {
   vpc_id                  = aws_vpc.my-vpc.id
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = var.map_public_ip_on_launch
   availability_zone       = data.aws_availability_zones.available.names[1]
   cidr_block              = var.public_cidr2
   tags = {
@@ -118,7 +116,7 @@ resource "aws_instance" "nat" {
 }
 # --------------- Setup NAT Instance #2 ------------------
 resource "aws_instance" "nat2" {
-  ami = data.aws_ami.amazon_nat.id
+  ami                         = data.aws_ami.amazon_nat.id
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.public-2.id
   vpc_security_group_ids      = ["${aws_security_group.nat-sg.id}", "${aws_security_group.controller-sg.id}"]

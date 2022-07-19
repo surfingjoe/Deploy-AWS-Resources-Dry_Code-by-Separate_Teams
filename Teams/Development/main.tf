@@ -12,19 +12,20 @@ provider "aws" {
 module "dev_vpc" {
   source = "../../modules/vpc"
 
-  bucket               = var.bucket
-  state-key            = var.state-key
-  dynamodb_table       = var.dynamodb_table
-  bucket-region        = var.bucket-region
-  region               = var.region
-  environment          = var.environment
-  owner_name           = var.owner_name
-  ec2-key              = var.ec2-key
-  instance_type        = var.instance_type
-  ssh_location         = var.ssh_location
-  enable_ipv6          = var.enable_ipv6
-  enable_dns_support   = var.enable_dns_support
-  enable_dns_hostnames = var.enable_dns_hostnames
+  bucket                  = var.bucket
+  state-key               = var.state-key
+  dynamodb_table          = var.dynamodb_table
+  bucket-region           = var.bucket-region
+  region                  = var.region
+  environment             = var.environment
+  owner_name              = var.owner_name
+  ec2-key                 = var.ec2-key
+  instance_type           = var.instance_type
+  ssh_location            = var.ssh_location
+  enable_ipv6             = false
+  enable_dns_support      = true
+  enable_dns_hostnames    = true
+  map_public_ip_on_launch = true
 }
 
 module "Docker_web" {
