@@ -39,7 +39,7 @@ The code found here is a part of my blog on using "Infrastructure as Code" with 
   * This repository does not include the "terraform.tvfars" files to protect sensitive information.  Goto my blog where you will find examples of the "terraform.tfvars" for each team.  I have written details about creating custom reusable code for different teams to use the same code, but apply variables to have acheive different outcomes accoring to a team's requirements of AWS resources.  My post for this exercise is [Terraform Reusable Modules](https://josephomara.com/2022/07/19/terraform-reusable-modules)
 
 
-* execute the following commands in each of team folder to see how different teams can use the same reusalbe code but acheive different outcomes:
+* execute the following commands in each team folder to see how different teams can use the same reusalbe code but acheive different outcomes:
    1. `Terraform init`
    2. `terraform validate`
    3. `Terraform apply`
